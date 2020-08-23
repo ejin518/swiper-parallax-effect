@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Swiper Slider</title>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'>
+<link rel='stylesheet' href="css/style.css">
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js'></script>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">
+
+<section class="hero-slider hero-style">
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<div class="slide-inner slide-bg-image" data-background="images/bg01.jpg" data-swiper-parallax-y="500">
+					<div class="bg"></div>
+					<div class="container">
+						<div data-swiper-parallax-y="200" class="slide-title">
+							<h2>What is Lorem Ipsum?</h2>
+						</div>
+						<div data-swiper-parallax-y="300" class="slide-text">
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="swiper-slide">
+				<div class="slide-inner slide-bg-image" data-background="images/bg02.jpg" data-swiper-parallax-y="500">
+					<div class="bg"></div>
+					<div class="container">
+						<div data-swiper-parallax-y="200" class="slide-title">
+							<h2>Where does it come from?</h2>
+						</div>
+						<div data-swiper-parallax-y="300" class="slide-text">
+							<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="swiper-slide">
+				<div class="slide-inner slide-bg-image" data-background="images/bg03.jpg" data-swiper-parallax-y="500">
+					<div class="bg"></div>
+					<div class="container">
+						<div data-swiper-parallax-y="200" class="slide-title">
+							<h2>Why do we use it?</h2>
+						</div>
+						<div data-swiper-parallax-y="300" class="slide-text">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="swiper-slide">
+				<div class="slide-inner slide-bg-image" data-background="images/bg04.jpg" data-swiper-parallax-y="500">
+					<div class="bg"></div>
+					<div class="container">
+						<div data-swiper-parallax-y="200" class="slide-title">
+							<h2>Where can I get some?</h2>
+						</div>
+						<div data-swiper-parallax-y="300" class="slide-text">
+							<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+</section>
+
+
+<script id="rendered-js">
+// HERO SLIDER
+var menu = [];
+jQuery('.swiper-slide').each(function (index) {
+  menu.push(jQuery(this).find('.slide-inner').attr("data-text"));
+});
+var interleaveOffset = 0.5;
+var swiperOptions = {
+	direction: 'vertical',
+	mousewheel: true,
+  loop: true,
+  speed: 1000,
+  parallax: true,
+  autoplay: false,
+
+  watchSlidesProgress: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true },
+
+  on: {
+    progress: function () {
+      var swiper = this;
+      for (var i = 0; i < swiper.slides.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+        var slideProgress = swiper.slides[i].progress;
+        var innerOffset = swiper.width * interleaveOffset;
+        var innerTranslate = slideProgress * innerOffset;
+        swiper.slides[i].querySelector(".slide-inner").style.transform =
+        "translate3d(" + innerTranslate + "0, px, 0)";
+      }window.CP.exitedLoop(0);
+    },
+
+    touchStart: function () {
+      var swiper = this;
+      for (var i = 0; i < swiper.slides.length; i++) {if (window.CP.shouldStopExecution(1)) break;
+        swiper.slides[i].style.transition = "";
+      }window.CP.exitedLoop(1);
+    },
+
+    setTransition: function (speed) {
+      var swiper = this;
+      for (var i = 0; i < swiper.slides.length; i++) {if (window.CP.shouldStopExecution(2)) break;
+        swiper.slides[i].style.transition = speed + "ms";
+        swiper.slides[i].querySelector(".slide-inner").style.transition =
+        speed + "ms";
+      }window.CP.exitedLoop(2);
+    } } };
+
+
+
+var swiper = new Swiper(".swiper-container", swiperOptions);
+
+// DATA BACKGROUND IMAGE
+var sliderBgSetting = $(".slide-bg-image");
+sliderBgSetting.each(function (indx) {
+  if ($(this).attr("data-background")) {
+    $(this).css("background-image", "url(" + $(this).data("background") + ")");
+  }
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>
